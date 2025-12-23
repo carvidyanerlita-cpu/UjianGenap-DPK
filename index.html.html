@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Ujian Genap PPLG X-2git ini</title>
+</head>
+<body>
+<script>
+let Jtransaksi= parseInt(prompt("Jumlah Transaksi: "));	
+let dataTransaksi = [];
+let totalDiskon = 0;
+let totalPembayaranAkhir = 0;
+	
+for(let i = 0; i < Jtransaksi; i++){
+	console.log(`-- Transaksi ke-${i + 1} --`);
+	
+	let baju = prompt("Jenis Baju(kaos/kemeja/jaket/hoodie): ");
+	let hargasatuan = parseInt(prompt("Harga Satuan: "));
+	let Jbaju = parseInt(prompt("Jumlah Baju: "));
+	let sesi = prompt("Sesi beli (pagi/siang/malam): ").toLowerCase();
+	
+	let hargaBaju = Jbaju * hargasatuan;
+    let diskon = 0;
+	
+	if(sesi === "pagi"){
+		if(Jbaju >= 11 && Jbaju <= 20){
+			diskon = ((10 * hargasatuan * 5) / 100)
+			+ ((Jbaju - 10) * hargasatuan * 10) / 100;
+		} else if(Jbaju > 20){
+			diskon = ((10 * hargasatuan * 5) / 100) 
+			+ ((10 * hargasatuan * 12) / 100) 
+			+ ((Jbaju - 20) * hargasatuan * 22) / 100;
+		}
+	} else if(sesi === "malam"){
+		if (Jbaju >= 11 && Jbaju <= 20){
+			diskon = ((10 * hargasatuan * 10) / 100) 
+			+ ((Jbaju - 10) * hargasatuan * 18) / 100;
+		} else if (Jbaju > 20){
+			diskon = ((10 * hargasatuan * 15) / 100) 
+			+ (10 * hargasatuan * 25) / 100 
+			+ ((Jbaju - 20) * hargasatuan * 35) / 100;
+		}
+	}
+	
+	let totalPembayaran = hargaBaju - diskon;
+	
+	dataTransaksi.push({
+		"Jenis baju": baju,
+		"Harga satuan": hargasatuan,
+		"Jumlah baju dibeli": Jbaju,
+		"Sesi pembelian": sesi,
+		"Diskon": diskon,
+		"Total": totalPembayaran
+	});
+
+	totalDiskon += diskon;
+	totalPembayaranAkhir += totalPembayaran;
+		
+	console.log("Jenis baju: " + baju);
+	console.log("Harga satuan: Rp " + hargasatuan);
+	console.log("Jumlah baju dibeli: " + Jbaju);
+	console.log("Sesi pembelian: " + sesi);
+	console.log("Total Harga: Rp " + hargaBaju);
+	console.log("Diskon: Rp " + diskon);
+	console.log("Total Bayar: Rp " + totalPembayaran);
+}
+
+let rataRata = totalPembayaranAkhir / Jtransaksi;
+
+console.log("--- REKAP PENJUALAN ---");
+console.log("Total jumlah transaksi: " + Jtransaksi);
+console.log("Total Diskon: Rp " + totalDiskon);
+console.log("Total Pendapatan: Rp " + totalPembayaranAkhir);
+console.log("Rata-rata pendapatan: Rp " + rataRata);
+</script>
+</body>
+</html>
